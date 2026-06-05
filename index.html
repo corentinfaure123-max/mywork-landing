@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Work — Gestion des tâches pour réseaux de restauration</title>
+  <meta name="description" content="My Work centralise la gestion des tâches de votre réseau de restaurants. Suivi en temps réel, notifications, rapports hebdomadaires.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:      #1E4A33;
+      --green-mid:  #2D6A4A;
+      --green-light:#E8F2EC;
+      --gold:       #FFC72C;
+      --text:       #1A1A2E;
+      --muted:      #6B7280;
+      --border:     #E5E7EB;
+      --white:      #FFFFFF;
+      --bg:         #F9FAFB;
+    }
+
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); line-height: 1.6; }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: .6rem; font-weight: 700; font-size: 1.1rem; color: var(--green); }
+    .nav-logo svg { width: 28px; height: 28px; }
+    .nav-cta {
+      background: var(--green); color: var(--white);
+      padding: .5rem 1.25rem; border-radius: 8px; font-weight: 600; font-size: .9rem;
+      transition: background .2s;
+    }
+    .nav-cta:hover { background: var(--green-mid); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
+      color: var(--white);
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 100px;
+      padding: .3rem 1rem; font-size: .8rem; font-weight: 600;
+      margin-bottom: 1.5rem; letter-spacing: .05em; text-transform: uppercase;
+    }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.15; margin-bottom: 1.25rem; }
+    .hero h1 span { color: var(--gold); }
+    .hero p { font-size: 1.15rem; opacity: .9; max-width: 540px; margin: 0 auto 2.5rem; }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold); color: var(--green);
+      padding: .85rem 2rem; border-radius: 10px; font-weight: 700; font-size: 1rem;
+      transition: transform .15s, box-shadow .15s;
+      box-shadow: 0 4px 14px rgba(0,0,0,.15);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.2); }
+    .btn-secondary {
+      background: rgba(255,255,255,.15); color: var(--white);
+      border: 1px solid rgba(255,255,255,.4);
+      padding: .85rem 2rem; border-radius: 10px; font-weight: 600; font-size: 1rem;
+      transition: background .2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,.25); }
+
+    /* ── MOCKUP ── */
+    .mockup-wrap {
+      max-width: 900px; margin: 3rem auto -4rem;
+      padding: 0 2rem;
+      position: relative;
+    }
+    .mockup {
+      background: #111827;
+      border-radius: 16px 16px 0 0;
+      box-shadow: 0 -8px 60px rgba(0,0,0,.35);
+      overflow: hidden;
+    }
+    .mockup-bar {
+      background: #1F2937; padding: .75rem 1rem;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .mockup-screen {
+      background: #F3F4F6;
+      min-height: 280px;
+      display: grid; grid-template-columns: 220px 1fr; gap: 0;
+    }
+    .mockup-sidebar {
+      background: var(--green); padding: 1.5rem 1rem;
+      display: flex; flex-direction: column; gap: .5rem;
+    }
+    .mockup-nav-item {
+      background: rgba(255,255,255,.1); border-radius: 8px;
+      padding: .6rem .75rem; color: rgba(255,255,255,.8);
+      font-size: .8rem; font-weight: 500;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .mockup-nav-item.active { background: rgba(255,255,255,.2); color: #fff; }
+    .mockup-content { padding: 1.5rem; }
+    .mockup-title { font-weight: 700; color: #111; margin-bottom: 1rem; font-size: .95rem; }
+    .mockup-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin-bottom: 1rem; }
+    .mockup-card {
+      background: #fff; border-radius: 8px; padding: .75rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+    }
+    .mockup-card-num { font-size: 1.5rem; font-weight: 800; color: var(--green); }
+    .mockup-card-label { font-size: .7rem; color: var(--muted); margin-top: .1rem; }
+    .mockup-tasks { display: flex; flex-direction: column; gap: .5rem; }
+    .mockup-task {
+      background: #fff; border-radius: 8px; padding: .6rem .75rem;
+      display: flex; align-items: center; gap: .75rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,.06);
+    }
+    .mockup-check { width: 16px; height: 16px; border-radius: 4px; border: 2px solid var(--border); flex-shrink: 0; }
+    .mockup-check.done { background: var(--green); border-color: var(--green); }
+    .mockup-task-text { font-size: .78rem; color: #374151; }
+    .mockup-tag {
+      margin-left: auto; font-size: .65rem; font-weight: 600;
+      padding: .15rem .5rem; border-radius: 100px;
+    }
+    .tag-high { background: #FEE2E2; color: #DC2626; }
+    .tag-normal { background: #DBEAFE; color: #1D4ED8; }
+    .tag-done { background: #D1FAE5; color: #059669; }
+
+    /* ── LOGOS ── */
+    .logos { padding: 3.5rem 2rem 0; text-align: center; }
+    .logos p { font-size: .85rem; color: var(--muted); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 500; }
+
+    /* ── SECTION GÉNÉRIQUE ── */
+    section { padding: 5rem 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--green); margin-bottom: .75rem; }
+    .section-title { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; line-height: 1.2; margin-bottom: 1rem; }
+    .section-sub { font-size: 1.05rem; color: var(--muted); max-width: 560px; }
+
+    /* ── FEATURES ── */
+    .features { background: var(--bg); }
+    .features-header { text-align: center; margin-bottom: 3.5rem; }
+    .features-header .section-sub { margin: 0 auto; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .feature-card {
+      background: var(--white); border-radius: 14px; padding: 1.75rem;
+      border: 1px solid var(--border);
+      transition: box-shadow .2s, transform .2s;
+    }
+    .feature-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,.08); transform: translateY(-3px); }
+    .feature-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: var(--green-light); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .feature-icon svg { width: 22px; height: 22px; stroke: var(--green); }
+    .feature-card h3 { font-weight: 700; margin-bottom: .5rem; font-size: 1rem; }
+    .feature-card p { font-size: .9rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── ROLES ── */
+    .roles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 3rem; }
+    .role-card {
+      border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border);
+      text-align: center;
+    }
+    .role-badge {
+      display: inline-block; padding: .3rem .85rem; border-radius: 100px;
+      font-size: .75rem; font-weight: 700; margin-bottom: 1rem;
+    }
+    .role-card h3 { font-size: .95rem; font-weight: 700; margin-bottom: .4rem; }
+    .role-card p { font-size: .82rem; color: var(--muted); }
+
+    /* ── HOW IT WORKS ── */
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .step { text-align: center; }
+    .step-num {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--green); color: #fff;
+      font-weight: 800; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem;
+    }
+    .step h3 { font-weight: 700; margin-bottom: .4rem; }
+    .step p { font-size: .88rem; color: var(--muted); }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
+      color: var(--white); text-align: center;
+    }
+    .cta-section .section-title { color: var(--white); }
+    .cta-section .section-sub { color: rgba(255,255,255,.8); margin: 0 auto 2.5rem; }
+    .cta-form {
+      display: flex; gap: 1rem; max-width: 480px; margin: 0 auto;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .cta-form input {
+      flex: 1; min-width: 220px;
+      padding: .85rem 1.25rem; border-radius: 10px; border: none;
+      font-size: 1rem; outline: none;
+    }
+    .cta-form button {
+      background: var(--gold); color: var(--green);
+      padding: .85rem 1.75rem; border-radius: 10px; border: none;
+      font-weight: 700; font-size: 1rem; cursor: pointer;
+      transition: transform .15s;
+    }
+    .cta-form button:hover { transform: translateY(-1px); }
+    .cta-hint { font-size: .82rem; opacity: .7; margin-top: 1rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111827; color: rgba(255,255,255,.5);
+      padding: 2rem; text-align: center; font-size: .85rem;
+    }
+    footer span { color: rgba(255,255,255,.8); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .mockup-screen { grid-template-columns: 1fr; }
+      .mockup-sidebar { display: none; }
+      .mockup-cards { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="28" height="28" rx="7" fill="#1E4A33"/>
+      <path d="M8 14l4 4 8-8" stroke="#FFC72C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    My Work
+  </div>
+  <a href="#contact" class="nav-cta">Demander une démo</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Gestion de réseau de restauration</div>
+  <h1>Pilotez vos restaurants<br><span>sans effort</span></h1>
+  <p>My Work centralise les tâches de tous vos restaurants, alerte vos directeurs en temps réel et vous donne une vue globale de votre réseau — depuis n'importe quel appareil.</p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Demander une démo gratuite</a>
+    <a href="#features" class="btn-secondary">Voir les fonctionnalités</a>
+  </div>
+
+  <!-- MOCKUP -->
+  <div class="mockup-wrap">
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="mockup-dot" style="background:#EF4444"></div>
+        <div class="mockup-dot" style="background:#F59E0B"></div>
+        <div class="mockup-dot" style="background:#10B981"></div>
+      </div>
+      <div class="mockup-screen">
+        <div class="mockup-sidebar">
+          <div class="mockup-nav-item active">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            Dashboard
+          </div>
+          <div class="mockup-nav-item">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+            Tâches
+          </div>
+          <div class="mockup-nav-item">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+            Restaurants
+          </div>
+          <div class="mockup-nav-item">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Calendrier
+          </div>
+        </div>
+        <div class="mockup-content">
+          <div class="mockup-title">Vue d'ensemble — Cette semaine</div>
+          <div class="mockup-cards">
+            <div class="mockup-card"><div class="mockup-card-num">24</div><div class="mockup-card-label">Tâches du jour</div></div>
+            <div class="mockup-card"><div class="mockup-card-num" style="color:#059669">87%</div><div class="mockup-card-label">Taux de complétion</div></div>
+            <div class="mockup-card"><div class="mockup-card-num" style="color:#DC2626">3</div><div class="mockup-card-label">En retard</div></div>
+          </div>
+          <div class="mockup-tasks">
+            <div class="mockup-task">
+              <div class="mockup-check done"></div>
+              <span class="mockup-task-text">Contrôle température frigos</span>
+              <span class="mockup-tag tag-done">Fait</span>
+            </div>
+            <div class="mockup-task">
+              <div class="mockup-check"></div>
+              <span class="mockup-task-text">Audit sécurité cuisine</span>
+              <span class="mockup-tag tag-high">Urgent</span>
+            </div>
+            <div class="mockup-task">
+              <div class="mockup-check"></div>
+              <span class="mockup-task-text">Mise à jour affichage prix</span>
+              <span class="mockup-tag tag-normal">Normal</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features" style="padding-top: 7rem;">
+  <div class="section-inner">
+    <div class="features-header">
+      <div class="section-label">Fonctionnalités</div>
+      <h2 class="section-title">Tout ce dont votre réseau a besoin</h2>
+      <p class="section-sub">Conçu pour les réseaux de restauration franchisée, My Work s'adapte à la taille et à l'organisation de votre réseau.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+        </div>
+        <h3>Gestion des tâches multi-restaurants</h3>
+        <p>Créez des tâches pour un restaurant ou l'ensemble de votre réseau. Suivez les completions en temps réel par restaurant.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+        </div>
+        <h3>Notifications en temps réel</h3>
+        <p>Push notifications sur mobile, alertes retard automatiques, commentaires instantanés entre directeurs et franchisé.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        </div>
+        <h3>Rapport hebdomadaire automatique</h3>
+        <p>Chaque vendredi, recevez par email un rapport de performance avec analyse IA : taux de complétion, retards, classement restaurants.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        </div>
+        <h3>Application mobile (PWA)</h3>
+        <p>Installez l'app sur iPhone ou Android sans passer par l'App Store. Interface optimisée pour une utilisation terrain.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <h3>Gestion des rôles</h3>
+        <p>5 niveaux d'accès distincts : franchisé, directeur des opérations, directeur de restaurant, manager, administrateur.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        </div>
+        <h3>Planification & récurrence</h3>
+        <p>Tâches ponctuelles, quotidiennes, hebdomadaires ou mensuelles. Calendrier visuel pour anticiper la charge de travail.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROLES -->
+<section>
+  <div class="section-inner">
+    <div class="section-label">Organisation</div>
+    <h2 class="section-title">Une app pour toute votre hiérarchie</h2>
+    <p class="section-sub">Chaque profil accède uniquement aux informations et actions qui le concernent.</p>
+    <div class="roles-grid">
+      <div class="role-card">
+        <div class="role-badge" style="background:#FEF3C7;color:#92400E;">Franchisé</div>
+        <h3>Vue réseau complète</h3>
+        <p>Tous les restaurants, toutes les statistiques, gestion des utilisateurs.</p>
+      </div>
+      <div class="role-card">
+        <div class="role-badge" style="background:#DBEAFE;color:#1E40AF;">Dir. Opérations</div>
+        <h3>Pilotage terrain</h3>
+        <p>Création de tâches, KPIs, dashboard multi-restaurants.</p>
+      </div>
+      <div class="role-card">
+        <div class="role-badge" style="background:#D1FAE5;color:#065F46;">Directeur</div>
+        <h3>Son restaurant</h3>
+        <p>Tâches de son restaurant, suivi des managers, commentaires.</p>
+      </div>
+      <div class="role-card">
+        <div class="role-badge" style="background:#EDE9FE;color:#5B21B6;">Manager</div>
+        <h3>Ses tâches</h3>
+        <p>Uniquement les tâches qui lui sont assignées. Interface simplifiée.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section style="background: var(--bg);">
+  <div class="section-inner">
+    <div class="section-label" style="text-align:center">Mise en place</div>
+    <h2 class="section-title" style="text-align:center">Opérationnel en 24h</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Démo & configuration</h3>
+        <p>On configure votre réseau, vos restaurants et vos accès ensemble.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Invitation de l'équipe</h3>
+        <p>Vos directeurs reçoivent un email d'invitation et créent leur mot de passe.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Création des tâches</h3>
+        <p>Importez ou créez vos tâches récurrentes. Elles s'assignent automatiquement.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Suivi en temps réel</h3>
+        <p>Consultez l'avancement depuis votre téléphone, où que vous soyez.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section class="cta-section" id="contact">
+  <div class="section-inner">
+    <h2 class="section-title">Prêt à gagner du temps ?</h2>
+    <p class="section-sub">Laissez votre email, on vous rappelle pour une démo de 30 minutes sur votre réseau.</p>
+    <form class="cta-form" onsubmit="handleSubmit(event)">
+      <input type="email" placeholder="votre@email.fr" required id="ctaEmail">
+      <button type="submit">Demander une démo</button>
+    </form>
+    <p class="cta-hint">Ou écrivez-nous directement : <strong>contact@mywork-app.fr</strong></p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 <span>My Work</span> — Gestion des tâches pour réseaux de restauration</p>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const email = document.getElementById('ctaEmail').value;
+    const btn = e.target.querySelector('button');
+    btn.textContent = '✓ Demande envoyée !';
+    btn.style.background = '#10B981';
+    btn.style.color = '#fff';
+    btn.disabled = true;
+    // TODO: remplacer par un vrai appel API (Formspree, Netlify Forms, etc.)
+    console.log('Demande de démo :', email);
+  }
+</script>
+
+</body>
+</html>
