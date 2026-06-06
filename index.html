@@ -31,16 +31,19 @@
     </svg>
     <span class="brand-name">My Work</span>
   </a>
-  <nav class="nav-links" aria-label="Navigation principale">
-    <a href="#produit">Le produit</a>
-    <a href="#features">Fonctionnalités</a>
-    <a href="#roles">Rôles</a>
-    <a href="#deploiement">Déploiement</a>
+  <nav class="nav-links" role="tablist" aria-label="Sections">
+    <a href="#produit" class="tab-link" data-tab="produit" role="tab">Le produit</a>
+    <a href="#features" class="tab-link" data-tab="features" role="tab">Fonctionnalités</a>
+    <a href="#pricing" class="tab-link" data-tab="pricing" role="tab">Tarifs</a>
+    <a href="#deploiement" class="tab-link" data-tab="deploiement" role="tab">Déploiement</a>
+    <a href="#faq" class="tab-link" data-tab="faq" role="tab">FAQ</a>
   </nav>
-  <a href="#contact" class="btn btn-primary nav-cta">Demander une démo</a>
+  <a href="#contact" class="btn btn-primary nav-cta tab-link" data-tab="contact">Demander une démo</a>
 </header>
 
 <main id="top">
+
+<div class="tab-panel is-active" id="panel-produit" data-panel="produit" data-screen-label="Onglet Le produit">
 
 <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
 <section class="hero" data-screen-label="hero">
@@ -51,13 +54,13 @@
       <h1 data-reveal style="--d:.05s">Vos restaurants tournent.<br><em>Vous gardez la main.</em></h1>
       <p class="lede" data-reveal style="--d:.12s">My Work centralise les tâches de tout votre réseau, alerte vos directeurs en temps réel et vous donne une vue claire&nbsp;— restaurant par restaurant, depuis votre téléphone.</p>
       <div class="hero-actions" data-reveal style="--d:.18s">
-        <a href="#contact" class="btn btn-primary btn-lg">Demander une démo</a>
-        <a href="#produit" class="btn btn-ghost btn-lg">Voir le produit</a>
+        <a href="#contact" class="btn btn-primary btn-lg tab-link" data-tab="contact">Demander une démo</a>
+        <a href="#features" class="btn btn-ghost btn-lg tab-link" data-tab="features">Voir les fonctionnalités</a>
       </div>
       <ul class="hero-meta" data-reveal style="--d:.24s">
-        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.8" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Opérationnel en 24h</li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.8" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Mise en route accompagnée</li>
         <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.8" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Sans installation</li>
-        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.8" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Web &amp; mobile</li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.8" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Web, mobile &amp; tablette</li>
       </ul>
     </div>
   </div>
@@ -169,12 +172,67 @@
   <div class="strip-inner">
     <div class="strip-item"><b>Temps réel</b><span>Complétions &amp; alertes en direct</span></div>
     <div class="strip-item"><b>5 rôles</b><span>Du franchisé au manager</span></div>
-    <div class="strip-item"><b>PWA</b><span>Installable, sans App Store</span></div>
-    <div class="strip-item"><b>Rapport IA</b><span>Synthèse hebdo automatique</span></div>
+    <div class="strip-item"><b>Multi-device</b><span>Web, mobile &amp; tablette</span></div>
+    <div class="strip-item"><b>Analyse IA</b><span>Reporting généré automatiquement</span></div>
   </div>
 </section>
 
-<!-- ═══════════════════════════ FEATURES ═══════════════════════════ -->
+<!-- ═══════════════════════════ AUDIENCE ═══════════════════════════ -->
+<section class="section audience" data-screen-label="audience">
+  <div class="container">
+    <header class="sec-head" data-reveal>
+      <span class="mono sec-eyebrow">Pour qui</span>
+      <h2>Pensé pour ceux qui pilotent plusieurs restaurants</h2>
+      <p>Du groupe en croissance au réseau de franchises établi&nbsp;: si vous gérez plus d'un établissement, My Work est fait pour vous.</p>
+    </header>
+    <div class="aud-grid" id="audGrid"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ MULTI-DEVICE ═══════════════════════════ -->
+<section class="section multidevice" data-screen-label="multidevice">
+  <div class="container md-inner" data-reveal>
+    <div class="md-copy">
+      <span class="mono sec-eyebrow">Multi-device</span>
+      <h2>Une seule app, sur tous vos écrans</h2>
+      <p>My Work suit vos équipes là où elles travaillent. Les données se synchronisent en temps réel d'un appareil à l'autre&nbsp;— aucune installation, aucun App Store.</p>
+    </div>
+    <ul class="md-list">
+      <li><span class="md-ic"><i class="ic ic-grid"></i></span><div><b>Au siège · ordinateur</b><span>Vue réseau, KPIs et pilotage multi-restaurants.</span></div></li>
+      <li><span class="md-ic"><i class="ic ic-shop"></i></span><div><b>En restaurant · tablette</b><span>Checklists et tâches du jour, à portée de main.</span></div></li>
+      <li><span class="md-ic"><i class="ic ic-check"></i></span><div><b>Sur le terrain · mobile</b><span>Notifications et complétions, où que vous soyez.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FEATURES + ROLES ═══════════════════════════ -->
+</div><!-- /panel-produit -->
+
+<div class="tab-panel" id="panel-features" data-panel="features" data-screen-label="Onglet Fonctionnalités">
+
+<!-- AI highlight -->
+<section class="section ai-sec" data-screen-label="ia">
+  <div class="container">
+    <div class="ai-banner" data-reveal>
+      <svg class="ai-arches" viewBox="0 0 540 260" preserveAspectRatio="none" aria-hidden="true">
+        <circle cx="500" cy="-70" r="210" fill="none" stroke="#fff" stroke-width="1"/>
+        <circle cx="500" cy="-70" r="160" fill="none" stroke="#fff" stroke-width="1"/>
+        <circle cx="500" cy="-70" r="110" fill="none" stroke="#fff" stroke-width="1"/>
+      </svg>
+      <div class="ai-copy">
+        <span class="mono ai-eyebrow"><span class="ai-spark">✦</span>Intelligence artificielle intégrée</span>
+        <h2>L'IA analyse vos données et rédige le rapport à votre place</h2>
+        <p>My Work analyse en continu les complétions, les retards et les écarts entre restaurants, puis génère des synthèses claires et des rapports prêts à partager&nbsp;— sans tableur, sans analyse manuelle.</p>
+      </div>
+      <ul class="ai-points">
+        <li><b>Analyse continue</b><span>Lecture automatique de l'activité de tout le réseau.</span></li>
+        <li><b>Reporting généré</b><span>Un rapport de performance synthétisé, prêt à l'emploi.</span></li>
+        <li><b>Détection des écarts</b><span>Les restaurants en difficulté remontent en premier.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <section class="section features" id="features" data-screen-label="features">
   <div class="container">
     <header class="sec-head" data-reveal>
@@ -186,7 +244,7 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════ ROLES ═══════════════════════════ -->
+<!-- ROLES (merged) -->
 <section class="section roles" id="roles" data-screen-label="roles">
   <div class="container">
     <header class="sec-head left" data-reveal>
@@ -198,19 +256,56 @@
   </div>
 </section>
 
+<!-- ═══════════════════════════ PRICING ═══════════════════════════ -->
+</div><!-- /panel-features -->
+
+<div class="tab-panel" id="panel-pricing" data-panel="pricing" data-screen-label="Onglet Tarifs">
+<section class="section pricing" id="pricing" data-screen-label="pricing">
+  <div class="container">
+    <header class="sec-head" data-reveal>
+      <span class="mono sec-eyebrow">Tarifs</span>
+      <h2>Un abonnement simple, par restaurant</h2>
+      <p>My Work est un logiciel en abonnement (SaaS). Vous payez à l'usage, par établissement, et vous montez en gamme quand votre réseau grandit.</p>
+    </header>
+    <div class="price-grid" id="priceGrid"></div>
+    <p class="price-foot" data-reveal>Les grilles tarifaires sont en cours de finalisation. Contactez-nous pour un devis adapté à la taille de votre réseau.</p>
+  </div>
+</section>
+</div><!-- /panel-pricing -->
+
 <!-- ═══════════════════════════ DEPLOIEMENT ═══════════════════════════ -->
+
+<div class="tab-panel" id="panel-deploiement" data-panel="deploiement" data-screen-label="Onglet Déploiement">
 <section class="section steps-sec" id="deploiement" data-screen-label="deploiement">
   <div class="container">
     <header class="sec-head" data-reveal>
       <span class="mono sec-eyebrow" style="color:var(--sand)">Mise en place</span>
-      <h2 style="color:#fff">Opérationnel en 24&nbsp;heures</h2>
-      <p style="color:rgba(255,255,255,.72)">Pas de projet informatique à rallonge. On configure votre réseau ensemble, vos équipes sont sur le terrain dès le lendemain.</p>
+      <h2 style="color:#fff">Un déploiement simple, sans projet IT</h2>
+      <p style="color:rgba(255,255,255,.72)">Pas de chantier informatique à rallonge. On configure votre réseau avec vous et vos équipes prennent l'app en main rapidement&nbsp;— le rythme s'adapte à la taille de votre organisation.</p>
     </header>
     <div class="steps" id="stepsGrid"></div>
   </div>
 </section>
 
+<!-- ═══════════════════════════ FAQ ═══════════════════════════ -->
+</div><!-- /panel-deploiement -->
+
+<div class="tab-panel" id="panel-faq" data-panel="faq" data-screen-label="Onglet FAQ">
+<section class="section faq" id="faq" data-screen-label="faq">
+  <div class="container">
+    <header class="sec-head" data-reveal>
+      <span class="mono sec-eyebrow">FAQ</span>
+      <h2>Les questions qu'on nous pose</h2>
+      <p>Vous ne trouvez pas votre réponse&nbsp;? Écrivez-nous, on répond vite.</p>
+    </header>
+    <div class="faq-list" id="faqList"></div>
+  </div>
+</section>
+
 <!-- ═══════════════════════════ CTA / CONTACT ═══════════════════════════ -->
+</div><!-- /panel-faq -->
+
+<div class="tab-panel" id="panel-contact" data-panel="contact" data-screen-label="Onglet Démo">
 <section class="section cta" id="contact" data-screen-label="contact">
   <div class="cta-glow" aria-hidden="true"></div>
   <div class="container cta-inner" data-reveal>
@@ -224,6 +319,7 @@
     <p class="cta-hint">Ou écrivez-nous directement&nbsp;: <strong>contact@mywork-app.fr</strong></p>
   </div>
 </section>
+</div><!-- /panel-contact -->
 
 </main>
 
@@ -249,10 +345,11 @@
       <p>Le copilote des opérations pour les réseaux de restauration.</p>
     </div>
     <nav class="footer-links" aria-label="Liens de pied de page">
-      <a href="#produit">Le produit</a>
-      <a href="#features">Fonctionnalités</a>
-      <a href="#roles">Rôles</a>
-      <a href="#contact">Démo</a>
+      <a href="#produit" class="tab-link" data-tab="produit">Le produit</a>
+      <a href="#features" class="tab-link" data-tab="features">Fonctionnalités</a>
+      <a href="#pricing" class="tab-link" data-tab="pricing">Tarifs</a>
+      <a href="#faq" class="tab-link" data-tab="faq">FAQ</a>
+      <a href="#contact" class="tab-link" data-tab="contact">Démo</a>
     </nav>
   </div>
   <div class="footer-base container">
